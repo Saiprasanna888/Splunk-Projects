@@ -1,1 +1,39 @@
+# 🔍 DNS Log Analysis with Splunk SIEM  
 
+## 📌 Introduction  
+DNS (Domain Name System) logs are essential for monitoring network activity and detecting suspicious or malicious behavior. Splunk SIEM provides a powerful platform to ingest, search, and analyze DNS logs for threat detection and anomaly detection.  
+
+This guide walks through:  
+1. Uploading DNS logs into Splunk  
+2. Running basic queries  
+3. Investigating anomalies and suspicious domains  
+
+---
+
+## ✅ Prerequisites  
+Before starting, make sure you have:  
+- A running **Splunk instance** (Enterprise, Free, or Splunk Cloud).  
+- **DNS log data sources** (e.g., BIND, Windows DNS, Zeek/Suricata).  
+
+---
+
+## 📂 Uploading Sample DNS Logs into Splunk  
+
+### 1. Prepare Log Files  
+- Extract the sample `.json` file.  
+- Ensure the logs contain fields such as `src_ip`, `dest_ip`, `fqdn`, `query_type`, `response_code`.  
+
+### 2. Add Data to Splunk  
+- Log in to **Splunk**.  
+- Navigate: **Settings → Add Data → Upload**.  
+- Select your **DNS log file**.  
+
+### 3. Configure Input  
+- **Source type** → Select `_json` (or create `dns_sample`).  
+- **Index** → Choose (or create) a dedicated index, e.g., `dns_index`.  
+- Review settings → ✅ Submit.  
+
+### 4. Verify Data  
+Run a quick search to confirm logs are ingested:  
+```spl
+index=dns_index sourcetype=dns_sample
